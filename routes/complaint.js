@@ -21,6 +21,13 @@ router.post("/",isLoggedIn,createComplaint);
 
 router.get("/mycomplaints",isLoggedIn,myComplaints);
 
+router.get("/history",isLoggedIn,async(req,res)=>{
+  const historyComplaints=await Complaint.find({
+    student:req.session.studentId,
+    status:{$in:["Resolved","Rejected"]}
+  });
+  res.render("complaints/history",{historyComplaints});
+});
 
 router.get("/:id/edit",isLoggedIn,isComplaintOwner,editComplaint);
 

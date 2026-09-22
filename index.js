@@ -11,6 +11,7 @@ const complaintSchema=require("./schema");
 const flash=require("connect-flash");
 const { resourceLimits } = require('worker_threads');
 const adminController = require("./controllers/admin");
+const { isLoggedIn } = require("./middleware");
 
 main()
 .then(()=>{

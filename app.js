@@ -8,6 +8,7 @@ const flash=require("connect-flash");
 const studentRoutes=require("./routes/student");
 const complaintRoutes=require("./routes/complaint");
 const adminRoutes=require("./routes/admin");
+const { isLoggedIn } = require("./middleware");
 
 main()
 .then(()=>{

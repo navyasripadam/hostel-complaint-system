@@ -22,17 +22,13 @@ module.exports.createComplaint=async (req,res)=>{
     res.redirect("/complaints/mycomplaints");
 };
 
-
 module.exports.myComplaints=async(req,res)=>{
-  // console.log(req.session.studentId);
-  // console.log(req.session);
-   const allComplaints=await Complaint.find({
-    student:req.session.studentId
-  });
-  //  console.log(allComplaints);
-  // console.log(res.locals.success);
+    const allComplaints=await Complaint.find({
+        student:req.session.studentId,
+        status:{$in:["Pending","In Progress"]}
+    });
+
     res.render("complaints/mycomplaints",{allComplaints});
-    
 };
 
 module.exports.editComplaint=async(req,res)=>{
