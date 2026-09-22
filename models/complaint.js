@@ -18,13 +18,17 @@ const complaintSchema=new mongoose.Schema({
          type:String,
          required:true,
     },
+    hostel:{
+        type:String,
+        required:true,
+    },
     roomNumber:{
         type:String,
         required:true,
     },
     status:{
         type:String,
-        enum:["Pending","In Progress","Resolved"],
+        enum:["Pending","In Progress","Resolved","Rejected"],
         default:"Pending",
     },
  },

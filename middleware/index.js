@@ -15,13 +15,19 @@ function isAdmin(req,res,next){
 }
 
 async function isComplaintOwner(req,res,next){
-    let {id}=req.params;
+    const {id}=req.params;
+
     const complaint=await Complaint.findById(id);
+
+    if(!complaint){
+        return res.send("Complaint not found");
+    }
+
     if(complaint.student.equals(req.session.studentId)){
-      next();
+        next();
     }else{
-      req.flash("error","You are not authorized to edit this complaint.");
-      return res.redirect("/mycomplaints");
+        req.flash("error","You are not authorized to edit this complaint.");
+        return res.redirect("/mycomplaints");
     }
 }
 

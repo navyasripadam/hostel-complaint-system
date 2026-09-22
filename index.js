@@ -122,9 +122,12 @@ app.post("/complaints",isLoggedIn,async (req,res)=>{
     if(error){
       return res.send(error.details[0].message);
     }
+    const student = await Student.findById(req.session.studentId);
     const complaint=new Complaint({
       ...req.body,
-      student:req.session.studentId
+      student:req.session.studentId,
+      hostel:student.hostel,
+      roomNumber:student.roomNumber
     });
     await complaint.save();
     req.flash("success","Complaint Submitted Successfully");
@@ -146,12 +149,14 @@ app.get("/students/register",(req,res)=>{
 });
 
 app.post("/students/register",async (req,res)=>{
-    const {name,email,password}=req.body;
+    const {name,email,password,hostel,roomNumber}=req.body;
     const hashedPassword=await bcrypt.hash(password,10);
     const student=new Student({
       name,
       email,
-      password:hashedPassword
+      password:hashedPassword,
+      hostel,
+      roomNumber
     });
     await student.save();
      req.flash("success","Registration Successful");

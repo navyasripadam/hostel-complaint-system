@@ -18,6 +18,14 @@ const studentSchema=new mongoose.Schema({
         type:String,
         enum:["student","admin"],
         default:"student"
+    },
+    hostel:{
+        type:String,
+        required:true
+    },
+    roomNumber:{
+        type:String,
+        required:true
     }
 });
 

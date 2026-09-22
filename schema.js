@@ -9,8 +9,7 @@ const complaintSchema=Joi.object({
         "civil",
         "wifi",
         "others"
-    ).required(),
-    roomNumber:Joi.string().required()
+    ).required()
 });
 
 

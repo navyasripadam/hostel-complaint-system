@@ -1,5 +1,7 @@
 const Complaint=require("../models/complaint");
+const Student=require("../models/student");
 const complaintSchema=require("../schema");
+
 
 
 module.exports.createComplaint=async (req,res)=>{
@@ -8,9 +10,12 @@ module.exports.createComplaint=async (req,res)=>{
     if(error){
       return res.send(error.details[0].message);
     }
+    const student = await Student.findById(req.session.studentId);
     const complaint=new Complaint({
       ...req.body,
-      student:req.session.studentId
+      student:req.session.studentId,
+      hostel:student.hostel,
+      roomNumber:student.roomNumber
     });
     await complaint.save();
     req.flash("success","Complaint Submitted Successfully");
@@ -43,7 +48,11 @@ module.exports.updateComplaint=async(req,res)=>{
       return res.send(error.details[0].message);
     }
   const{id}=req.params;
-  await Complaint.findByIdAndUpdate(id,req.body);
+  await Complaint.findByIdAndUpdate(id, {
+    title: req.body.title,
+    description: req.body.description,
+    category: req.body.category
+});
    req.flash("success","Complaint Updated Successfully");
    console.log(req.session);
   res.redirect("/complaints/mycomplaints");

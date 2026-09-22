@@ -2,10 +2,9 @@ const express=require("express");
 const router=express.Router();
 
 const Complaint=require("../models/complaint");
-const {isLoggedIn,isAdmin,isComplaintOwner}=require("../middleware");
+const {isLoggedIn,isComplaintOwner}=require("../middleware");
 const { createComplaint,myComplaints,editComplaint,updateComplaint,deleteComplaint} = require("../controllers/complaint");
 
-const complaintSchema=require("../schema");
 
 //to raise a new complaint
 router.get("/new",isLoggedIn,(req,res)=>{

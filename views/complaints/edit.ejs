@@ -23,15 +23,15 @@
             <textarea class="form-control mb-3" type="text" placeholder="Describe your issue" name="description"><%=complaint.description%></textarea>
             <div class="row">
                 <div class="col-md-6">
-                    <select class="form-select mb-3"  name="category" value="<%=complaint.category%>">
-                        <option value="electrical">Electrical</option>
-                        <option value="plumbing">Plumbing</option>
-                        <option value="civil">Civil Works</option>
-                        <option value="wifi">WIFI</option>
-                        <option value="others">Others</option>
-                    </select>
+                    <select class="form-select mb-3" name="category">
+    <option value="electrical" <%= complaint.category === "electrical" ? "selected" : "" %>>Electrical</option>
+    <option value="plumbing" <%= complaint.category === "plumbing" ? "selected" : "" %>>Plumbing</option>
+    <option value="civil" <%= complaint.category === "civil" ? "selected" : "" %>>Civil Works</option>
+    <option value="wifi" <%= complaint.category === "wifi" ? "selected" : "" %>>WIFI</option>
+    <option value="others" <%= complaint.category === "others" ? "selected" : "" %>>Others</option>
+</select>
                 </div>
-                <div class="col-md-6"><input class="form-control" type="text" name="roomNumber" value="<%=complaint.roomNumber%>"></div>
+               
             </div>
             <button class="btn btn-primary w-100" type="submit">Edit Complaint</button>
         </form>
