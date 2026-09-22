@@ -1,0 +1,20 @@
+
+     <%if( success && success.length){%>
+        <div class="container mt-3">
+        <div class="alert alert-success alert-dismissable fade show">
+            <%=success%>
+            <button class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        </div>
+    <%}%>
+
+
+
+     <%if( error && error.length){%>
+        <div class="container mt-3">
+        <div class="alert alert-danger alert-dismissable fade show">
+           <%=error%>
+           <button class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        </div>
+    <%}%>
