@@ -3,7 +3,11 @@ const router=express.Router();
 
 const Student=require("../models/student");
 const bcrypt=require("bcrypt");
-const { registerStudent,loginStudent } = require("../controllers/student");
+const {
+    registerStudent,
+    loginStudent,
+    showProfile
+} = require("../controllers/student");
 
 router.get("/register",(req,res)=>{
   res.render("students/register");
@@ -20,3 +24,5 @@ router.get("/login",(req,res)=>{
 router.post("/login",loginStudent);
 
 module.exports=router;
+
+router.get("/profile",showProfile);

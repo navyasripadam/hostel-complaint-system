@@ -1,6 +1,6 @@
 const express=require("express");
 const router=express.Router();
-const { adminLogin,showComplaints,editComplaint,updateComplaint} = require("../controllers/admin");
+const { adminLogin,showComplaints,editComplaint,updateComplaint,showComplaint} = require("../controllers/admin");
 
 
 const Complaint=require("../models/complaint");
@@ -20,6 +20,13 @@ router.get("/complaints",isLoggedIn,isAdmin,showComplaints);
 
 
 router.get("/complaints/:id/edit",editComplaint);
+
+router.get(
+    "/complaints/:id",
+    isLoggedIn,
+    isAdmin,
+    showComplaint
+);
 
 
 

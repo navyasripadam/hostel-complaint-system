@@ -76,6 +76,11 @@
                                     <% } %>
 
                                 </p>
+                                  <% if (complaint.createdAt) { %>
+    <p class="text-muted small">
+       <strong> Submitted: </strong><%= complaint.createdAt.toLocaleString() %>
+    </p>
+<% } %>
 
                             </div>
 

@@ -29,7 +29,7 @@ module.exports.showComplaints=async(req,res)=>{
 
   if(search){
     const searchText=search.toLowerCase();
-    complaints=complaints.filter(complaint=>complaint.title?.toLowerCase().includes(searchText)||complaint.roomNumber?.toLowerCase().includes(searchText)||complaint.student?.name?.toLowerCase().includes(searchText));
+    complaints=complaints.filter(complaint=>complaint.title?.toLowerCase().includes(searchText)||complaint.roomNumber?.toLowerCase().includes(searchText)||complaint.hostel?.toLowerCase().includes(searchText) ||complaint.student?.name?.toLowerCase().includes(searchText));
   }
 
 
@@ -42,12 +42,16 @@ if(sort==="oldest"){
 }
 
   const allComplaints=await Complaint.find();
+  const categories = ["electrical", "plumbing", "civil", "wifi", "others"];
+const categoryCounts = categories.map(category =>
+    allComplaints.filter(c => c.category === category).length
+);
   const total=allComplaints.length;
   const pending=allComplaints.filter(c=>c.status==="Pending").length;
   const inProgress=allComplaints.filter(c=>c.status==="In Progress").length;
   const resolved=allComplaints.filter(c=>c.status==="Resolved").length;
   const rejected=allComplaints.filter(c=>c.status==="Rejected").length;
-  res.render("admin/index",{complaints,total,pending,inProgress,resolved,rejected});
+  res.render("admin/index",{complaints,total,pending,inProgress,resolved,rejected,categories,categoryCounts});
 };
 
 module.exports.editComplaint=async(req,res)=>{
@@ -64,4 +68,16 @@ module.exports.updateComplaint=async(req,res)=>{
   );
     req.flash("success","Complaint Updated Successfully");
   res.redirect("/admin/complaints");
+};
+
+
+module.exports.showComplaint = async (req, res) => {
+    const complaint = await Complaint.findById(req.params.id)
+        .populate("student");
+
+    if (!complaint) {
+        return res.send("Complaint not found");
+    }
+
+    res.render("admin/details", { complaint });
 };

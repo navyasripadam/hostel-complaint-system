@@ -61,6 +61,11 @@
                         <span class="badge bg-danger">Rejected</span>
                     <%}%>
                 </p>
+                     <% if (complaint.createdAt) { %>
+    <p class="text-muted small">
+       <strong> Submitted: </strong><%= complaint.createdAt.toLocaleString() %>
+    </p>
+<% } %>
                 <a href="/complaints/<%=complaint._id%>/edit" class="btn btn-warning btn-sm">Edit</a>
                 <form action="/complaints/<%=complaint._id%>?_method=DELETE" method="post" class="d-inline">
                     <button class="btn btn-danger btn-sm">Delete</button>

@@ -42,3 +42,12 @@ module.exports.loginStudent=async(req,res)=>{
    }
 };
 
+module.exports.showProfile = async (req, res) => {
+    const student = await Student.findById(req.session.studentId);
+
+    if (!student) {
+        return res.send("Student not found");
+    }
+
+    res.render("students/profile", { student });
+};
