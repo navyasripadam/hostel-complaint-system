@@ -51,7 +51,17 @@ const categoryCounts = categories.map(category =>
   const inProgress=allComplaints.filter(c=>c.status==="In Progress").length;
   const resolved=allComplaints.filter(c=>c.status==="Resolved").length;
   const rejected=allComplaints.filter(c=>c.status==="Rejected").length;
-  res.render("admin/index",{complaints,total,pending,inProgress,resolved,rejected,categories,categoryCounts});
+  res.render("admin/index", {
+    complaints,
+    total,
+    pending,
+    inProgress,
+    resolved,
+    rejected,
+    categories,
+    categoryCounts,
+    sort
+});
 };
 
 module.exports.editComplaint=async(req,res)=>{
