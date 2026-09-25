@@ -32,73 +32,46 @@
 
     <div class="container mt-4">
 
-        <form action="/admin/complaints" method="GET" class="row g-2 mb-4">
+       <form action="/admin/complaints" method="GET" class="row g-2 mb-4 align-items-center">
 
-            <div class="col-md-4">
+    <!-- Search -->
+    <div class="col">
+        <input type="text"
+               name="search"
+               class="form-control"
+               placeholder="Search by title, hostel, room or student"
+               value="<%= search || '' %>">
+    </div>
 
-                <input
-                    type="text"
-                    name="search"
-                    class="form-control"
-                    placeholder="Search by title, hostel, room or student">
+    <!-- Status -->
+    <div class="col">
+        <select name="status" class="form-select">
+            <option value="" <%= !status ? "selected" : "" %>>All Complaints</option>
+            <option value="Pending" <%= status==="Pending" ? "selected" : "" %>>Pending</option>
+            <option value="In Progress" <%= status==="In Progress" ? "selected" : "" %>>In Progress</option>
+            <option value="Resolved" <%= status==="Resolved" ? "selected" : "" %>>Resolved</option>
+            <option value="Rejected" <%= status==="Rejected" ? "selected" : "" %>>Rejected</option>
+        </select>
+    </div>
 
-            </div>
+    <!-- Search Button -->
+    <div class="col">
+        <button class="btn btn-primary w-100">Search</button>
+    </div>
 
-
-            <div class="col-md-3">
-
-                <select name="status" class="form-select">
-
-                    <option value="">
-                        All Complaints
-                    </option>
-
-                    <option value="Pending">
-                        Pending
-                    </option>
-
-                    <option value="In Progress">
-                        In Progress
-                    </option>
-
-                    <option value="Resolved">
-                        Resolved
-                    </option>
-
-                    <option value="Rejected">
-                        Rejected
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="col-md-2">
-
-                <button class="btn btn-primary w-100">
-                    Search
-                </button>
-
-            </div>
-
-
-            <div class="col-md-3 d-flex justify-content-end">
-
-    <button
-        type="submit"
-        name="sort"
-        value="<%= sort === 'oldest' ? 'newest' : 'oldest' %>"
-        class="btn"
-        title="Sort">
-
-        <i class="fa-solid fa-sort" style="color: #003b73;"></i>
-
+   <!-- Sort Icon -->
+<div class="col-auto">
+    <button type="submit"
+            name="sort"
+            value="<%= sort === 'oldest' ? 'newest' : 'oldest' %>"
+            class="btn p-0 border-0 bg-transparent"
+            style="color:#003b73;"
+            title="<%= sort === 'oldest' ? 'Newest First' : 'Oldest First' %>">
+        <i class="fa-solid fa-sort fs-5"></i>
     </button>
-
 </div>
 
-        </form>
+</form>
 
 
         <!-- Dashboard Statistics -->
